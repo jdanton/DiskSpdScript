@@ -1,4 +1,4 @@
-$path = '/Users/joey/Dropbox/DiskSpd/V2'
+$path = '/Users/joey/Dropbox/DiskSpd/perfplus'
 
 # Initialize a dictionary to store all percentile data
 $allResults = @{}
@@ -111,8 +111,10 @@ foreach ($percentile in $percentileOrder) {
 }
 
 # Export to CSV
-$outputPath = Join-Path -Path $path -ChildPath "latency_averages.csv"
+$timestamp = Get-Date -Format "yyyy-MM-dd_HH-mm-ss"
+$outputPath = Join-Path -Path $path -ChildPath "latency_averages_$timestamp.csv"
 $resultsForCsv | Export-CSV -Path $outputPath -NoTypeInformation
+
 
 Write-Host "`nProcessing complete. Processed $fileCount files." -ForegroundColor Cyan
 Write-Host "Average latency distribution saved to: $outputPath" -ForegroundColor Green
